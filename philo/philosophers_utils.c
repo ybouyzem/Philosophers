@@ -6,7 +6,7 @@
 /*   By: ybouyzem <ybouyzem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 12:05:30 by ybouyzem          #+#    #+#             */
-/*   Updated: 2024/11/09 06:00:26 by ybouyzem         ###   ########.fr       */
+/*   Updated: 2024/11/10 01:23:31 by ybouyzem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,23 @@ int ft_atoi(char *str)
 size_t get_current_time()
 {
 	struct timeval tv;
+	//contains tv.tv_sec (seconds) and tv.tv_usec (microseconds)
 	size_t time;
 
 	gettimeofday(&tv, NULL);
 	time = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
 	return (time);
+}
+
+void my_sleep(size_t time, t_philo *philo)
+{
+	size_t start;
+
+	start = get_current_time();
+	while (get_current_time() - start < time)
+	{
+		if (philo->program->dead_flag)
+			break ;
+		usleep(100);
+	}
 }

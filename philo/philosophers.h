@@ -6,7 +6,7 @@
 /*   By: ybouyzem <ybouyzem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 11:17:07 by ybouyzem          #+#    #+#             */
-/*   Updated: 2024/11/09 06:08:27 by ybouyzem         ###   ########.fr       */
+/*   Updated: 2024/11/10 01:23:02 by ybouyzem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,20 @@
 #include <string.h>
 #include <stdio.h>
 
+typedef struct s_program
+{
+	int             num_of_philos;
+	int				required_meals;
+	int             dead_flag;
+	size_t          time_to_die;
+	size_t          time_to_eat;
+	size_t          time_to_sleep;
+	pthread_t	   monitor;
+	pthread_mutex_t dead_lock;
+	pthread_mutex_t meal_lock;
+	pthread_mutex_t write_lock;
+} t_program;
+
 typedef struct s_philo
 {
 	pthread_t       thread;
@@ -29,21 +43,8 @@ typedef struct s_philo
 	size_t          start_time;
 	pthread_mutex_t *right_fork;
 	pthread_mutex_t *left_fork;
+	t_program       *program;
 } t_philo;
-
-typedef struct s_program
-{
-	int				required_meals;
-	int             dead_flag;
-	size_t          time_to_die;
-	size_t          time_to_eat;
-	size_t          time_to_sleep;
-	pthread_mutex_t dead_lock;
-	pthread_mutex_t meal_lock;
-	pthread_mutex_t write_lock;
-	int             num_of_philos;
-	t_philo 		*philos;
-} t_program;
 
 
 int     ft_isdigit(char c);
@@ -58,5 +59,7 @@ int	init_forks(pthread_mutex_t *forks, t_program *program);
 int	allocate_utils(t_philo **philo, pthread_mutex_t **forks, t_program program);
 int	init_program(t_program *program, t_philo *philos, pthread_mutex_t *forks, char **argv);
 size_t	get_current_time();
-
+void    *ft_monitor(void    *arg);
+void    *ft_philo(void    *arg);
+void my_sleep(size_t time, t_philo *philo);
 #endif

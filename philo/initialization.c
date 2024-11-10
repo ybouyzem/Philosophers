@@ -6,7 +6,7 @@
 /*   By: ybouyzem <ybouyzem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 05:58:16 by ybouyzem          #+#    #+#             */
-/*   Updated: 2024/11/09 06:11:52 by ybouyzem         ###   ########.fr       */
+/*   Updated: 2024/11/09 23:51:24 by ybouyzem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int	init_philos(t_program *program, t_philo *philos, pthread_mutex_t *forks)
 {
 	int i;
 
-
 	i = 0;
 	while (i < program->num_of_philos)
 	{
@@ -45,8 +44,8 @@ int	init_philos(t_program *program, t_philo *philos, pthread_mutex_t *forks)
 		else
 			philos[i].right_fork = &forks[i - 1];
 		i++;
+		philos[i].program = program;
 	}
-	program->philos = philos;
 	return (0);
 }
 
@@ -57,7 +56,6 @@ int	init_forks(pthread_mutex_t *forks, t_program *program)
 	i = 0;
 	while (i < program->num_of_philos)
 	{
-
 		pthread_mutex_init(&forks[i], NULL);
 		i++;
 	}
@@ -78,7 +76,6 @@ int	init_program(t_program *program, t_philo *philos, pthread_mutex_t *forks, ch
 	else
 		program->required_meals = -1;
 	program->dead_flag = 0;
-
 	pthread_mutex_init(&program->dead_lock, NULL);
 	pthread_mutex_init(&program->meal_lock, NULL);
 	pthread_mutex_init(&program->write_lock, NULL);
