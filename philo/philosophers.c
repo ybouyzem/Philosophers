@@ -6,7 +6,7 @@
 /*   By: ybouyzem <ybouyzem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 11:16:50 by ybouyzem          #+#    #+#             */
-/*   Updated: 2024/11/10 01:23:21 by ybouyzem         ###   ########.fr       */
+/*   Updated: 2024/11/11 06:54:46 by ybouyzem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,18 @@ void    *ft_philo(void    *arg)
 		my_sleep(philo->program->time_to_eat, philo);
 	while (1)
 	{
-		pthread_mutex_lock(philo->left_fork);
-		pthread_mutex_lock(philo->right_fork);
-		philo->last_meal = get_current_time();
+		if (is_dead(philo))
+			break ;
+		if (is_holding_forks(philo))
+			break ;
+		eating(philo);
 		pthread_mutex_unlock(philo->left_fork);
 		pthread_mutex_unlock(philo->right_fork);
-		usleep(philo->program->time_to_eat * 1000);
-		usleep(philo->program->time_to_sleep * 1000);
+		printer(philo, SLEEPING);
+		my_sleep(philo->program->time_to_sleep, philo);
+		printer(philo, THINKING);
 	}
+	return (NULL);
 }
 
 

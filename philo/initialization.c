@@ -6,7 +6,7 @@
 /*   By: ybouyzem <ybouyzem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 05:58:16 by ybouyzem          #+#    #+#             */
-/*   Updated: 2024/11/09 23:51:24 by ybouyzem         ###   ########.fr       */
+/*   Updated: 2024/11/11 06:19:54 by ybouyzem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ int	init_philos(t_program *program, t_philo *philos, pthread_mutex_t *forks)
 			philos[i].right_fork = &forks[program->num_of_philos - 1];
 		else
 			philos[i].right_fork = &forks[i - 1];
-		i++;
 		philos[i].program = program;
+		i++;
 	}
 	return (0);
 }
@@ -62,11 +62,12 @@ int	init_forks(pthread_mutex_t *forks, t_program *program)
 	return (0);
 }
 
-int	init_program(t_program *program, t_philo *philos, pthread_mutex_t *forks, char **argv)
+int	init_program(t_program *program, t_philo **philos, pthread_mutex_t **forks, char **argv)
 {
 	int	i;
 
 	i = 0;
+	program->dead_flag = 0;
 	program->num_of_philos = ft_atoi(argv[1]);
 	program->time_to_die = ft_atoi(argv[2]);
 	program->time_to_eat = ft_atoi(argv[3]);
@@ -79,9 +80,9 @@ int	init_program(t_program *program, t_philo *philos, pthread_mutex_t *forks, ch
 	pthread_mutex_init(&program->dead_lock, NULL);
 	pthread_mutex_init(&program->meal_lock, NULL);
 	pthread_mutex_init(&program->write_lock, NULL);
-    if (allocate_utils(&philos, &forks, *program))
+    if (allocate_utils(philos, forks, *program))
         return (1);
-	init_forks(forks, program);
-	init_philos(program, philos, forks);
+	init_forks(*forks, program);
+	init_philos(program, *philos, *forks);
 	return (0);
 }

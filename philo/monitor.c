@@ -6,7 +6,7 @@
 /*   By: ybouyzem <ybouyzem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 06:29:51 by ybouyzem          #+#    #+#             */
-/*   Updated: 2024/11/10 01:45:27 by ybouyzem         ###   ########.fr       */
+/*   Updated: 2024/11/11 08:07:50 by ybouyzem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void    *ft_monitor(void    *arg)
 {
     int    i;
-    long long passtime;
+    size_t passtime;
     t_philo *philos;
 
     philos = (t_philo *)arg;
@@ -31,11 +31,12 @@ void    *ft_monitor(void    *arg)
                 pthread_mutex_lock(&philos[i].program->dead_lock);
                 philos->program->dead_flag = 1;
                 pthread_mutex_unlock(&philos[i].program->dead_lock);
-            // monitor unlock
+                printer(&philos[i], DEAD);
                 return (NULL);
             }
+            
+            
             // monitor unlock
         }
     }
 }
-
