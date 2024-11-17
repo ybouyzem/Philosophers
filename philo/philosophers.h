@@ -6,7 +6,7 @@
 /*   By: ybouyzem <ybouyzem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 11:17:07 by ybouyzem          #+#    #+#             */
-/*   Updated: 2024/11/11 06:55:33 by ybouyzem         ###   ########.fr       */
+/*   Updated: 2024/11/14 23:40:05 by ybouyzem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_program
 	size_t          time_to_eat;
 	size_t          time_to_sleep;
 	pthread_t	   monitor;
+	pthread_mutex_t monitor_lock;
 	pthread_mutex_t dead_lock;
 	pthread_mutex_t meal_lock;
 	pthread_mutex_t write_lock;

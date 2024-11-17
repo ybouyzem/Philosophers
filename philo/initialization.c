@@ -6,7 +6,7 @@
 /*   By: ybouyzem <ybouyzem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 05:58:16 by ybouyzem          #+#    #+#             */
-/*   Updated: 2024/11/11 06:19:54 by ybouyzem         ###   ########.fr       */
+/*   Updated: 2024/11/16 18:32:07 by ybouyzem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	allocate_utils(t_philo **philo, pthread_mutex_t **forks, t_program program)
 	}
 	return (0);
 }
-
 
 int	init_philos(t_program *program, t_philo *philos, pthread_mutex_t *forks)
 {
@@ -77,6 +76,7 @@ int	init_program(t_program *program, t_philo **philos, pthread_mutex_t **forks, 
 	else
 		program->required_meals = -1;
 	program->dead_flag = 0;
+	pthread_mutex_init(&program->monitor_lock, NULL);
 	pthread_mutex_init(&program->dead_lock, NULL);
 	pthread_mutex_init(&program->meal_lock, NULL);
 	pthread_mutex_init(&program->write_lock, NULL);

@@ -6,7 +6,7 @@
 /*   By: ybouyzem <ybouyzem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 06:29:51 by ybouyzem          #+#    #+#             */
-/*   Updated: 2024/11/11 08:07:50 by ybouyzem         ###   ########.fr       */
+/*   Updated: 2024/11/17 12:15:53 by ybouyzem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,22 @@ void    *ft_monitor(void    *arg)
     philos = (t_philo *)arg;
     while (1)
     {
-        i = -1;
-        while (++i < philos[0].program->num_of_philos)
+        i = 0;
+        while (i < philos[0].program->num_of_philos)
         { 
-            // monitor lock
+            pthread_mutex_lock(&philos[0].program->monitor_lock);
             passtime = get_current_time() - philos[i].last_meal;
             if (passtime > philos[i].program->time_to_die)
             {
                 pthread_mutex_lock(&philos[i].program->dead_lock);
                 philos->program->dead_flag = 1;
                 pthread_mutex_unlock(&philos[i].program->dead_lock);
-                printer(&philos[i], DEAD);
+                printf("%d is died\n", philos[i].id);
+                pthread_mutex_unlock(&philos[0].program->monitor_lock);
                 return (NULL);
             }
-            
-            
-            // monitor unlock
+            i++;
+            pthread_mutex_unlock(&philos[0].program->monitor_lock);
         }
     }
 }

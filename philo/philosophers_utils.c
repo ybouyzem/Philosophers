@@ -6,7 +6,7 @@
 /*   By: ybouyzem <ybouyzem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 12:05:30 by ybouyzem          #+#    #+#             */
-/*   Updated: 2024/11/11 07:02:53 by ybouyzem         ###   ########.fr       */
+/*   Updated: 2024/11/17 12:32:05 by ybouyzem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,6 @@ int ft_atoi(char *str)
 void	printer(t_philo *philo, int mode)
 {
 	size_t time;
-	if (is_dead(philo) || philo->is_finished)
-		return ;
 	pthread_mutex_lock(&philo->program->write_lock);
 	time = get_current_time() - philo->start_time;
 	if (mode == LFORK)
@@ -72,12 +70,6 @@ void	printer(t_philo *philo, int mode)
 		printf("%d is sleeping\n", philo->id);
 	else if (mode == THINKING)
 		printf("%d is thinking\n", philo->id);
-	else if (mode == DEAD)
-	{
-		printf("%d died\n", philo->id);
-		pthread_mutex_unlock(&philo->program->write_lock);
-		return ;
-	}
 	pthread_mutex_unlock(&philo->program->write_lock);
 }
 size_t get_current_time()
