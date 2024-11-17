@@ -6,7 +6,7 @@
 /*   By: ybouyzem <ybouyzem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 06:07:33 by ybouyzem          #+#    #+#             */
-/*   Updated: 2024/11/17 12:29:49 by ybouyzem         ###   ########.fr       */
+/*   Updated: 2024/11/17 17:54:41 by ybouyzem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void    simulation(t_program *program, t_philo *philos)
 		if (pthread_join(philos[i].thread, NULL))
 			return ;
 		i++;
-	}		
+	}
 }
 
 int main(int argc, char **argv)
@@ -56,8 +56,7 @@ int main(int argc, char **argv)
 	t_program program;
 	t_philo *philos;
 	pthread_mutex_t *forks;
-	
-	
+
 	if (argc < 5 || argc > 6)
 		return (write(2, "invalid number of arguments!\n", 30), 1);
 	if (check_args(argv))

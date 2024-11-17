@@ -6,7 +6,7 @@
 /*   By: ybouyzem <ybouyzem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 05:58:16 by ybouyzem          #+#    #+#             */
-/*   Updated: 2024/11/16 18:32:07 by ybouyzem         ###   ########.fr       */
+/*   Updated: 2024/11/17 17:32:42 by ybouyzem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	init_philos(t_program *program, t_philo *philos, pthread_mutex_t *forks)
 	{
 		philos[i].id = i + 1;
 		philos[i].meals_eaten = 0;
+		philos[i].finish_eating = 0;
 		philos[i].last_meal = get_current_time();
 		philos[i].start_time = get_current_time();
 		philos[i].left_fork = &forks[i];
@@ -66,7 +67,7 @@ int	init_program(t_program *program, t_philo **philos, pthread_mutex_t **forks, 
 	int	i;
 
 	i = 0;
-	program->dead_flag = 0;
+	program->program_finished = 0;
 	program->num_of_philos = ft_atoi(argv[1]);
 	program->time_to_die = ft_atoi(argv[2]);
 	program->time_to_eat = ft_atoi(argv[3]);
@@ -75,7 +76,6 @@ int	init_program(t_program *program, t_philo **philos, pthread_mutex_t **forks, 
 		program->required_meals = ft_atoi(argv[5]);
 	else
 		program->required_meals = -1;
-	program->dead_flag = 0;
 	pthread_mutex_init(&program->monitor_lock, NULL);
 	pthread_mutex_init(&program->dead_lock, NULL);
 	pthread_mutex_init(&program->meal_lock, NULL);

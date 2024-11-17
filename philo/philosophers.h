@@ -6,7 +6,7 @@
 /*   By: ybouyzem <ybouyzem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 11:17:07 by ybouyzem          #+#    #+#             */
-/*   Updated: 2024/11/17 14:03:36 by ybouyzem         ###   ########.fr       */
+/*   Updated: 2024/11/17 17:45:39 by ybouyzem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@
 #include <string.h>
 #include <stdio.h>
 
-# define LFORK 0
-# define RFORK 1
+# define FORK 1
 # define EATING 2
 # define SLEEPING 3
 # define THINKING 4
@@ -32,7 +31,7 @@ typedef struct s_program
 {
 	int             num_of_philos;
 	int				required_meals;
-	int             dead_flag;
+	int				program_finished;
 	size_t          time_to_die;
 	size_t          time_to_eat;
 	size_t          time_to_sleep;
@@ -48,7 +47,7 @@ typedef struct s_philo
 	pthread_t       thread;
 	int             id;
 	int             meals_eaten;
-	int			    is_finished;
+	int			    finish_eating;
 	size_t          last_meal;
 	size_t          start_time;
 	pthread_mutex_t *right_fork;

@@ -6,7 +6,7 @@
 /*   By: ybouyzem <ybouyzem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 11:16:50 by ybouyzem          #+#    #+#             */
-/*   Updated: 2024/11/17 12:16:57 by ybouyzem         ###   ########.fr       */
+/*   Updated: 2024/11/17 18:14:25 by ybouyzem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,12 @@ int	check_args(char **argv)
 		return (write(2, "invalid time_to_eat's number!\n", 29), 1);
 	if (check_is_num(argv[4]) || ft_atoi(argv[4]) <= 0)
 		return (write(2, "invalid time_to_sleep's number!\n", 29), 1);
-	if (argv[5] && (check_is_num(argv[5]) || ft_atoi(argv[5]) < 0))
+	if (argv[5] && (check_is_num(argv[5]) || ft_atoi(argv[5]) <= 0))
+	{
+		if (ft_atoi(argv[5]) == 0)
+			return (1);
 		return (write(2, "invalid times_each_philo_must_eat number!\n", 29), 1);
+	}
 	return (0);
 }
 
