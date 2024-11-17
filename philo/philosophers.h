@@ -6,7 +6,7 @@
 /*   By: ybouyzem <ybouyzem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 11:17:07 by ybouyzem          #+#    #+#             */
-/*   Updated: 2024/11/14 23:40:05 by ybouyzem         ###   ########.fr       */
+/*   Updated: 2024/11/17 14:03:36 by ybouyzem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,5 @@ int is_dead(t_philo *philo);
 int	is_holding_forks(t_philo *philo);
 void	printer(t_philo *philo, int mode);
 void	eating(t_philo *philo);
+int	all_philos_finished(t_philo *philos);
 #endif

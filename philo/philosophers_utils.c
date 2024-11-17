@@ -6,7 +6,7 @@
 /*   By: ybouyzem <ybouyzem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 12:05:30 by ybouyzem          #+#    #+#             */
-/*   Updated: 2024/11/17 12:32:05 by ybouyzem         ###   ########.fr       */
+/*   Updated: 2024/11/17 14:08:49 by ybouyzem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void my_sleep(size_t time, t_philo *philo)
 int is_dead(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->program->dead_lock);
-	if (philo->program->dead_flag || philo->is_finished)
+	if (philo->program->dead_flag)
 	{
 		pthread_mutex_unlock(&philo->program->dead_lock);
 		return (1);
