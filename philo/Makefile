@@ -6,7 +6,7 @@
 #    By: ybouyzem <ybouyzem@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/03 11:16:14 by ybouyzem          #+#    #+#              #
-#    Updated: 2024/11/11 07:01:28 by ybouyzem         ###   ########.fr        #
+#    Updated: 2024/11/20 21:27:23 by ybouyzem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,24 +17,23 @@ HEADER = philosophers.h
 FILES = main.c philosophers.c philosophers_utils.c initialization.c\
 		monitor.c \
 
-CFLAGS =  -Wall -Wextra -Werror 
+CFLAGS =  -Wall -Wextra -Werror -fsanitize=thread -g
 
 OBJECTFILES = $(FILES:.c=.o)
-PROGRAM = philo
 
 %.o: %.c $(HEADER)
 	cc $(CFLAGS) -o $@ -c $<
  
-$(PROGRAM): $(OBJECTFILES)
-	cc $(OBJECTFILES) -o $(PROGRAM)
+$(NAME): $(OBJECTFILES)
+	cc $(OBJECTFILES) $(CFLAGS) -o $(NAME)
 
-all: $(PROGRAM)
+all: $(NAME)
 
 clean:
 	rm -f $(OBJECTFILES)
 
 fclean: clean
-	rm -f $(PROGRAM)
+	rm -f $(NAME)
 
 re: fclean all
 
