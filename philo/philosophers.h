@@ -6,7 +6,7 @@
 /*   By: ybouyzem <ybouyzem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 11:17:07 by ybouyzem          #+#    #+#             */
-/*   Updated: 2024/11/17 17:45:39 by ybouyzem         ###   ########.fr       */
+/*   Updated: 2024/11/20 21:54:28 by ybouyzem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,20 @@
 #include <string.h>
 #include <stdio.h>
 
-# define FORK 1
-# define EATING 2
-# define SLEEPING 3
-# define THINKING 4
-# define DEAD 5
+# define FORK "has taken a fork"
+# define EATING "is eating"
+# define SLEEPING "is sleeping"
+# define THINKING "is thinking"
+# define DEAD "died"
+
+// enum e_mode
+// {
+// 	FORK,
+// 	EATING,
+// 	SLEEPING,
+// 	THINKING,
+// 	DEAD
+// };
 
 
 typedef struct s_program
@@ -76,4 +85,5 @@ int	is_holding_forks(t_philo *philo);
 void	printer(t_philo *philo, int mode);
 void	eating(t_philo *philo);
 int	all_philos_finished(t_philo *philos);
+int	ft_write(t_philo *philo, char *str);
 #endif

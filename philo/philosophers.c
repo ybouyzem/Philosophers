@@ -6,7 +6,7 @@
 /*   By: ybouyzem <ybouyzem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 11:16:50 by ybouyzem          #+#    #+#             */
-/*   Updated: 2024/11/17 18:14:25 by ybouyzem         ###   ########.fr       */
+/*   Updated: 2024/11/20 22:34:05 by ybouyzem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void    *ft_philo(void    *arg)
 
 	philo = (t_philo *)arg;
 	if (philo->id % 2 == 0)
-		my_sleep(philo->program->time_to_eat, philo);
+		my_sleep(50, philo);
 	while (1)
 	{
 		if (is_dead(philo))
@@ -65,11 +65,13 @@ void    *ft_philo(void    *arg)
 		if (is_holding_forks(philo))
 			break ;
 		eating(philo);
-		pthread_mutex_unlock(philo->left_fork);
-		pthread_mutex_unlock(philo->right_fork);
-		printer(philo, SLEEPING);
+		// pthread_mutex_unlock(philo->left_fork);
+		// pthread_mutex_unlock(philo->right_fork);
+		// printer(philo, SLEEPING);
+		ft_write(philo, SLEEPING);
 		my_sleep(philo->program->time_to_sleep, philo);
-		printer(philo, THINKING);
+		// printer(philo, THINKING);
+		ft_write(philo, THINKING);
 	}
 	return (NULL);
 }
