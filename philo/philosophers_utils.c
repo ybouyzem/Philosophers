@@ -6,7 +6,7 @@
 /*   By: ybouyzem <ybouyzem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 12:05:30 by ybouyzem          #+#    #+#             */
-/*   Updated: 2024/11/20 22:40:59 by ybouyzem         ###   ########.fr       */
+/*   Updated: 2024/11/20 23:36:51 by ybouyzem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,12 +155,12 @@ void	eating(t_philo *philo)
 	pthread_mutex_lock(&philo->program->monitor_lock);
 	philo->last_meal = get_current_time();
 	pthread_mutex_unlock(&philo->program->monitor_lock);
-	my_sleep(philo->program->time_to_eat, philo);
-	pthread_mutex_unlock(philo->left_fork);
-	pthread_mutex_unlock(philo->right_fork);
 	pthread_mutex_lock(&philo->program->meal_lock);
 	philo->meals_eaten++;
 	if (philo->meals_eaten == philo->program->required_meals)
 		philo->finish_eating = 1;
 	pthread_mutex_unlock(&philo->program->meal_lock);
+	my_sleep(philo->program->time_to_eat, philo);
+	pthread_mutex_unlock(philo->left_fork);
+	pthread_mutex_unlock(philo->right_fork);
 }
