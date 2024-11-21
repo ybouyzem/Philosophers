@@ -6,7 +6,7 @@
 #    By: ybouyzem <ybouyzem@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/03 11:16:14 by ybouyzem          #+#    #+#              #
-#    Updated: 2024/11/20 23:35:24 by ybouyzem         ###   ########.fr        #
+#    Updated: 2024/11/21 00:56:46 by ybouyzem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ OBJECTFILES = $(FILES:.c=.o)
 
 %.o: %.c $(HEADER)
 	cc $(CFLAGS) -o $@ -c $<
- 
+
 $(NAME): $(OBJECTFILES)
 	cc $(OBJECTFILES) $(CFLAGS) -o $(NAME)
 
