@@ -6,7 +6,7 @@
 /*   By: ybouyzem <ybouyzem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 12:05:30 by ybouyzem          #+#    #+#             */
-/*   Updated: 2024/11/21 14:33:03 by ybouyzem         ###   ########.fr       */
+/*   Updated: 2024/11/21 15:27:57 by ybouyzem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ int ft_isspace(char c)
 	return (0);
 }
 
-int ft_atoi(char *str)
+long ft_atoi(char *str)
 {
-	int n;
+	long n;
 	int i;
 	int sign;
 	

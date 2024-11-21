@@ -6,7 +6,7 @@
 /*   By: ybouyzem <ybouyzem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 11:17:07 by ybouyzem          #+#    #+#             */
-/*   Updated: 2024/11/20 21:54:28 by ybouyzem         ###   ########.fr       */
+/*   Updated: 2024/11/21 15:48:09 by ybouyzem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
+#include <limits.h>
 
 # define FORK "has taken a fork"
 # define EATING "is eating"
@@ -69,7 +70,7 @@ int     ft_isdigit(char c);
 int ft_isspace(char c);
 int	check_args(char **argv);
 int	check_is_num(char *str);
-int     ft_atoi(char *str);
+long     ft_atoi(char *str);
 int	init_forks(pthread_mutex_t *forks, t_program *program);
 int	init_philos(t_program *program, t_philo *philos, pthread_mutex_t *forks);
 int	check_args(char **argv);
@@ -82,8 +83,9 @@ void    *ft_philo(void    *arg);
 void my_sleep(size_t time, t_philo *philo);
 int is_dead(t_philo *philo);
 int	is_holding_forks(t_philo *philo);
-void	printer(t_philo *philo, int mode);
 void	eating(t_philo *philo);
 int	all_philos_finished(t_philo *philos);
 int	ft_write(t_philo *philo, char *str);
+void    ft_mutex(pthread_mutex_t *mutex, int mode);
+void    *ft_malloc(size_t size, int mode);
 #endif

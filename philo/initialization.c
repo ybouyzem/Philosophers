@@ -6,7 +6,7 @@
 /*   By: ybouyzem <ybouyzem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 05:58:16 by ybouyzem          #+#    #+#             */
-/*   Updated: 2024/11/17 17:32:42 by ybouyzem         ###   ########.fr       */
+/*   Updated: 2024/11/21 15:55:17 by ybouyzem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,12 @@
 
 int	allocate_utils(t_philo **philo, pthread_mutex_t **forks, t_program program)
 {
-	(*philo) = (t_philo *)malloc(sizeof(t_philo) * program.num_of_philos);
+	(*philo) = (t_philo *)ft_malloc(sizeof(t_philo) * program.num_of_philos, 0);
 	if (!(*philo))
 		return (1);
-	(*forks) = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * program.num_of_philos);
+	(*forks) = (pthread_mutex_t *)ft_malloc(sizeof(pthread_mutex_t) * program.num_of_philos, 0);
 	if (!(*forks))
-	{
-		free(*philo);
 		return (1);
-	}
 	return (0);
 }
 
@@ -57,6 +54,7 @@ int	init_forks(pthread_mutex_t *forks, t_program *program)
 	while (i < program->num_of_philos)
 	{
 		pthread_mutex_init(&forks[i], NULL);
+		ft_mutex(&forks[i], 0);
 		i++;
 	}
 	return (0);
@@ -77,9 +75,13 @@ int	init_program(t_program *program, t_philo **philos, pthread_mutex_t **forks, 
 	else
 		program->required_meals = -1;
 	pthread_mutex_init(&program->monitor_lock, NULL);
+	ft_mutex(&program->monitor_lock, 0);
 	pthread_mutex_init(&program->dead_lock, NULL);
+	ft_mutex(&program->dead_lock, 0);
 	pthread_mutex_init(&program->meal_lock, NULL);
+	ft_mutex(&program->meal_lock, 0);
 	pthread_mutex_init(&program->write_lock, NULL);
+	ft_mutex(&program->write_lock, 0);
     if (allocate_utils(philos, forks, *program))
         return (1);
 	init_forks(*forks, program);

@@ -6,7 +6,7 @@
 /*   By: ybouyzem <ybouyzem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 06:07:33 by ybouyzem          #+#    #+#             */
-/*   Updated: 2024/11/21 14:30:30 by ybouyzem         ###   ########.fr       */
+/*   Updated: 2024/11/21 15:55:00 by ybouyzem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,15 @@ int	check_is_num(char *str)
 
 int	check_args(char **argv)
 {
-	if (check_is_num(argv[1]) || ft_atoi(argv[1]) <= 0)
+	if (check_is_num(argv[1]) || ft_atoi(argv[1]) <= 0 || ft_atoi(argv[1]) > INT_MAX)
 		return (write(2, "invalid philsophers's number!\n", 29), 1);
-	if (check_is_num(argv[2]) || ft_atoi(argv[2]) <= 0)
+	if (check_is_num(argv[2]) || ft_atoi(argv[2]) <= 0 || ft_atoi(argv[2]) > INT_MAX)
 		return (write(2, "invalid time_to_die's number!\n", 29), 1);
-	if (check_is_num(argv[3]) || ft_atoi(argv[3]) <= 0)
+	if (check_is_num(argv[3]) || ft_atoi(argv[3]) <= 0 || ft_atoi(argv[3]) > INT_MAX)
 		return (write(2, "invalid time_to_eat's number!\n", 29), 1);
-	if (check_is_num(argv[4]) || ft_atoi(argv[4]) <= 0)
+	if (check_is_num(argv[4]) || ft_atoi(argv[4]) <= 0 || ft_atoi(argv[4]) > INT_MAX)
 		return (write(2, "invalid time_to_sleep's number!\n", 29), 1);
-	if (argv[5] && (check_is_num(argv[5]) || ft_atoi(argv[5]) <= 0))
+	if (argv[5] && (check_is_num(argv[5]) || ft_atoi(argv[5]) <= 0 || ft_atoi(argv[5]) > INT_MAX))
 	{
 		if (ft_atoi(argv[5]) == 0)
 			return (1);
@@ -100,7 +100,9 @@ int main(int argc, char **argv)
 		return (write(2, "invalid number of arguments!\n", 30), 1);
 	if (check_args(argv))
 		return (1);
-	init_program(&program, &philos, &forks, argv);
+	if (init_program(&program, &philos, &forks, argv))
+		return (ft_malloc(0, 1), ft_mutex(NULL, 1), 1);
 	simulation(&program, philos);
+	ft_malloc(0, 1);
 	return (0);
 }
