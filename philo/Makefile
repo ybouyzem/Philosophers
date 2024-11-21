@@ -6,7 +6,7 @@
 #    By: ybouyzem <ybouyzem@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/03 11:16:14 by ybouyzem          #+#    #+#              #
-#    Updated: 2024/11/21 00:56:46 by ybouyzem         ###   ########.fr        #
+#    Updated: 2024/11/21 14:29:47 by ybouyzem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME=philo
 
 HEADER = philosophers.h
 
-FILES = main.c philosophers.c philosophers_utils.c initialization.c\
+FILES = main.c philosophers.c utils.c initialization.c\
 		monitor.c \
 
 CFLAGS =  -Wall -Wextra -Werror  #-fsanitize=thread -g
