@@ -6,7 +6,7 @@
 /*   By: ybouyzem <ybouyzem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 11:17:07 by ybouyzem          #+#    #+#             */
-/*   Updated: 2024/11/21 15:48:09 by ybouyzem         ###   ########.fr       */
+/*   Updated: 2024/11/22 17:21:23 by ybouyzem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,6 @@
 # define SLEEPING "is sleeping"
 # define THINKING "is thinking"
 # define DEAD "died"
-
-// enum e_mode
-// {
-// 	FORK,
-// 	EATING,
-// 	SLEEPING,
-// 	THINKING,
-// 	DEAD
-// };
-
 
 typedef struct s_program
 {

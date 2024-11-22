@@ -6,7 +6,7 @@
 /*   By: ybouyzem <ybouyzem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 05:58:16 by ybouyzem          #+#    #+#             */
-/*   Updated: 2024/11/21 15:55:17 by ybouyzem         ###   ########.fr       */
+/*   Updated: 2024/11/22 17:20:55 by ybouyzem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ int	init_forks(pthread_mutex_t *forks, t_program *program)
 	i = 0;
 	while (i < program->num_of_philos)
 	{
-		pthread_mutex_init(&forks[i], NULL);
+		if (pthread_mutex_init(&forks[i], NULL))
+			return (1);
 		ft_mutex(&forks[i], 0);
 		i++;
 	}
@@ -74,17 +75,22 @@ int	init_program(t_program *program, t_philo **philos, pthread_mutex_t **forks, 
 		program->required_meals = ft_atoi(argv[5]);
 	else
 		program->required_meals = -1;
-	pthread_mutex_init(&program->monitor_lock, NULL);
+	if (pthread_mutex_init(&program->monitor_lock, NULL) != 0)
+		return (2);
 	ft_mutex(&program->monitor_lock, 0);
-	pthread_mutex_init(&program->dead_lock, NULL);
+	if (pthread_mutex_init(&program->dead_lock, NULL) != 0)
+		return (2);
 	ft_mutex(&program->dead_lock, 0);
-	pthread_mutex_init(&program->meal_lock, NULL);
+	if (pthread_mutex_init(&program->meal_lock, NULL) != 0)
+		return (2);
 	ft_mutex(&program->meal_lock, 0);
-	pthread_mutex_init(&program->write_lock, NULL);
+	if (pthread_mutex_init(&program->write_lock, NULL) != 0)
+		return (2);
 	ft_mutex(&program->write_lock, 0);
     if (allocate_utils(philos, forks, *program))
         return (1);
-	init_forks(*forks, program);
+	if (init_forks(*forks, program))
+		return (2);
 	init_philos(program, *philos, *forks);
 	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: ybouyzem <ybouyzem@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/03 11:16:14 by ybouyzem          #+#    #+#              #
-#    Updated: 2024/11/21 15:55:29 by ybouyzem         ###   ########.fr        #
+#    Updated: 2024/11/22 19:13:32 by ybouyzem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ HEADER = philosophers.h
 FILES = main.c philosophers.c utils.c initialization.c\
 		monitor.c malloc.c\
 
-CFLAGS =  -Wall -Wextra -Werror  #-fsanitize=thread -g
+CFLAGS =  -Wall -Wextra -Werror  #-fsanitize=thread -g 
 
 OBJECTFILES = $(FILES:.c=.o)
 

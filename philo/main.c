@@ -6,7 +6,7 @@
 /*   By: ybouyzem <ybouyzem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 06:07:33 by ybouyzem          #+#    #+#             */
-/*   Updated: 2024/11/21 15:55:00 by ybouyzem         ###   ########.fr       */
+/*   Updated: 2024/11/22 17:47:08 by ybouyzem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,31 +67,36 @@ void	print_philo(t_philo *philo)
 	printf("philo program %p\n", philo->program);
 }
 
-void    simulation(t_program *program, t_philo *philos)
+int    simulation(t_program *program, t_philo *philos)
 {
 	int i;
+	
 	i = 0;
-	if (pthread_create(&program->monitor, NULL, ft_monitor, philos))
-		return ;
+	if (pthread_create(&program->monitor, NULL, ft_monitor, philos) != 0)
+		return (1);
 	while (i < program->num_of_philos)
 	{
-		if (pthread_create(&philos[i].thread, NULL, ft_philo, &philos[i]))
-			return ;
+		if (pthread_create(&philos[i].thread, NULL, ft_philo, &philos[i]) != 0)
+			return (1);
 		i++;
 	}
-	if (pthread_join(program->monitor, NULL))
-		return ;
+	if (pthread_join(program->monitor, NULL) != 0)
+		return (1);
 	i = 0;
 	while (i < program->num_of_philos)
 	{
-		if (pthread_join(philos[i].thread, NULL))
-			return ;
+		if (pthread_join(philos[i].thread, NULL) != 0)
+			return (1);
 		i++;
 	}
+	return (0);
 }
+
+
 
 int main(int argc, char **argv)
 {
+	// atexit(leaks);
 	t_program program;
 	t_philo *philos;
 	pthread_mutex_t *forks;
@@ -101,8 +106,10 @@ int main(int argc, char **argv)
 	if (check_args(argv))
 		return (1);
 	if (init_program(&program, &philos, &forks, argv))
-		return (ft_malloc(0, 1), ft_mutex(NULL, 1), 1);
-	simulation(&program, philos);
+		return (printf("initialization failed!\n"), ft_malloc(0, 1), ft_mutex(NULL, 1), 1);
+	if (simulation(&program, philos))
+		return (printf("simulation failed!\n"), ft_malloc(0, 1), ft_mutex(NULL, 1), 1);
 	ft_malloc(0, 1);
+	ft_mutex(NULL, 1);
 	return (0);
 }
