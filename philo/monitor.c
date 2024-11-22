@@ -6,7 +6,7 @@
 /*   By: ybouyzem <ybouyzem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 06:29:51 by ybouyzem          #+#    #+#             */
-/*   Updated: 2024/11/22 17:27:53 by ybouyzem         ###   ########.fr       */
+/*   Updated: 2024/11/22 21:00:05 by ybouyzem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,25 +43,20 @@ void    *ft_monitor(void    *arg)
 		i = 0;
 		while (i < philos[0].program->num_of_philos)
 		{
-			if (pthread_mutex_lock(&philos[0].program->monitor_lock) != 0)
-				return (printf("failed to lock mutex\n"), NULL);
+			pthread_mutex_lock(&philos[0].program->monitor_lock);
 			passtime = get_current_time() - philos[i].last_meal;
-			if (passtime >= philos[i].program->time_to_die || all_philos_finished(philos))
+			if (passtime > philos[i].program->time_to_die || all_philos_finished(philos))
 			{
-				if (pthread_mutex_lock(&philos[i].program->dead_lock) != 0)
-					return (printf("failed to lock mutex\n"), NULL);
+				pthread_mutex_lock(&philos[i].program->dead_lock);
 				philos->program->program_finished = 1;
-				if (pthread_mutex_unlock(&philos[i].program->dead_lock) != 0)
-					return (printf("failed to unlock mutex\n"), NULL);
+				pthread_mutex_unlock(&philos[i].program->dead_lock);
 				if (!all_philos_finished(philos))
 					printf("%zu %d died\n", (get_current_time() - philos[i].start_time), philos[i].id);
-				if (pthread_mutex_unlock(&philos[0].program->monitor_lock) != 0)
-					return (printf("failed to unlock mutex\n"), NULL);
+				pthread_mutex_unlock(&philos[0].program->monitor_lock);
 				return (NULL);
 			}
 			i++;
-			if (pthread_mutex_unlock(&philos[0].program->monitor_lock) != 0)
-				return (printf("failed to unlock mutex\n"), NULL);
+			pthread_mutex_unlock(&philos[0].program->monitor_lock);
 		}
 	}
 }

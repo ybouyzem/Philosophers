@@ -6,7 +6,7 @@
 /*   By: ybouyzem <ybouyzem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 11:16:50 by ybouyzem          #+#    #+#             */
-/*   Updated: 2024/11/22 19:20:55 by ybouyzem         ###   ########.fr       */
+/*   Updated: 2024/11/22 20:57:58 by ybouyzem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,14 @@ int is_dead(t_philo *philo)
 
 int	is_holding_forks(t_philo *philo)
 {
-	if (pthread_mutex_lock(philo->left_fork))
-		return (1);
+	pthread_mutex_lock(philo->left_fork);
 	ft_write(philo, FORK);
 	if (philo->program->num_of_philos == 1)
 	{
 		pthread_mutex_unlock(philo->left_fork);
 		return (1);
 	}
-	if (pthread_mutex_lock(philo->right_fork))
-		return (1);
+	pthread_mutex_lock(philo->right_fork);
 	ft_write(philo, FORK);
 	return (0);
 }
@@ -81,7 +79,9 @@ void    *ft_philo(void    *arg)
 	while (1)
 	{
 		if (is_dead(philo))
+		{
 			break ;
+		}
 		if (is_holding_forks(philo))
 			break ;
 		eating(philo);

@@ -6,7 +6,7 @@
 /*   By: ybouyzem <ybouyzem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 11:17:07 by ybouyzem          #+#    #+#             */
-/*   Updated: 2024/11/22 17:21:23 by ybouyzem         ###   ########.fr       */
+/*   Updated: 2024/11/22 20:10:50 by ybouyzem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,11 @@ typedef struct s_philo
 } t_philo;
 
 
-int     ft_isdigit(char c);
-int ft_isspace(char c);
-int	check_args(char **argv);
-int	check_is_num(char *str);
-long     ft_atoi(char *str);
+int		ft_isdigit(char c);
+int		ft_isspace(char c);
+int		check_args(char **argv);
+int		check_is_num(char *str);
+long	ft_atoi(char *str);
 int	init_forks(pthread_mutex_t *forks, t_program *program);
 int	init_philos(t_program *program, t_philo *philos, pthread_mutex_t *forks);
 int	check_args(char **argv);
