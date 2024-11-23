@@ -6,7 +6,7 @@
 /*   By: ybouyzem <ybouyzem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 05:58:16 by ybouyzem          #+#    #+#             */
-/*   Updated: 2024/11/23 03:16:26 by ybouyzem         ###   ########.fr       */
+/*   Updated: 2024/11/23 03:57:14 by ybouyzem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,11 @@ int	init_philos(t_program *program, t_philo *philos, pthread_mutex_t *forks)
 		philos[i].meals_eaten = 0;
 		philos[i].finish_eating = 0;
 		philos[i].last_meal = get_current_time();
+		if (philos[i].last_meal == 0)
+			return (1);
 		philos[i].start_time = get_current_time();
+		if (philos[i].start_time == 0)
+			return (1);
 		philos[i].left_fork = &forks[i];
 		if (i == 0)
 			philos[i].right_fork = &forks[program->num_of_philos - 1];
@@ -95,6 +99,7 @@ int	init_program(t_program *program, t_philo **philos,
 		return (1);
 	if (init_forks(*forks, program))
 		return (2);
-	init_philos(program, *philos, *forks);
+	if (init_philos(program, *philos, *forks))
+		return (3);
 	return (0);
 }

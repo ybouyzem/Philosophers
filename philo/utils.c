@@ -6,7 +6,7 @@
 /*   By: ybouyzem <ybouyzem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 12:05:30 by ybouyzem          #+#    #+#             */
-/*   Updated: 2024/11/23 03:12:54 by ybouyzem         ###   ########.fr       */
+/*   Updated: 2024/11/23 03:58:28 by ybouyzem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ size_t	get_current_time(void)
 	struct timeval	tv;
 	size_t			time;
 
-	gettimeofday(&tv, NULL);
+	if (gettimeofday(&tv, NULL) == -1)
+		return (0);
 	time = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
 	return (time);
 }
@@ -67,6 +68,8 @@ void	my_sleep(size_t time, t_philo *philo)
 	size_t	start;
 
 	start = get_current_time();
+	if (start == 0)
+		return ;
 	while (get_current_time() - start < time)
 	{
 		pthread_mutex_lock(&philo->program->monitor_lock);
