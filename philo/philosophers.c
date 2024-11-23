@@ -6,7 +6,7 @@
 /*   By: ybouyzem <ybouyzem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 11:16:50 by ybouyzem          #+#    #+#             */
-/*   Updated: 2024/11/22 20:57:58 by ybouyzem         ###   ########.fr       */
+/*   Updated: 2024/11/23 02:13:04 by ybouyzem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int	ft_write(t_philo *philo, char *str)
 {
-	size_t timestamp;
+	size_t	timestamp;
+
 	pthread_mutex_lock(&philo->program->dead_lock);
 	if (philo->program->program_finished)
 	{
@@ -27,7 +28,7 @@ int	ft_write(t_philo *philo, char *str)
 	return (0);
 }
 
-int is_dead(t_philo *philo)
+int	is_dead(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->program->dead_lock);
 	if (philo->program->program_finished)
@@ -69,9 +70,9 @@ void	eating(t_philo *philo)
 	pthread_mutex_unlock(philo->right_fork);
 }
 
-void    *ft_philo(void    *arg)
+void	*ft_philo(void *arg)
 {
-	t_philo *philo;
+	t_philo	*philo;
 
 	philo = (t_philo *)arg;
 	if (philo->id % 2 == 0)
@@ -91,8 +92,3 @@ void    *ft_philo(void    *arg)
 	}
 	return (NULL);
 }
-
-
-
-
-

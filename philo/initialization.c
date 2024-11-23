@@ -6,7 +6,7 @@
 /*   By: ybouyzem <ybouyzem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 05:58:16 by ybouyzem          #+#    #+#             */
-/*   Updated: 2024/11/22 17:20:55 by ybouyzem         ###   ########.fr       */
+/*   Updated: 2024/11/23 03:16:26 by ybouyzem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ int	allocate_utils(t_philo **philo, pthread_mutex_t **forks, t_program program)
 	(*philo) = (t_philo *)ft_malloc(sizeof(t_philo) * program.num_of_philos, 0);
 	if (!(*philo))
 		return (1);
-	(*forks) = (pthread_mutex_t *)ft_malloc(sizeof(pthread_mutex_t) * program.num_of_philos, 0);
+	(*forks) = (pthread_mutex_t *)
+		ft_malloc(sizeof(pthread_mutex_t) * program.num_of_philos, 0);
 	if (!(*forks))
 		return (1);
 	return (0);
@@ -25,7 +26,7 @@ int	allocate_utils(t_philo **philo, pthread_mutex_t **forks, t_program program)
 
 int	init_philos(t_program *program, t_philo *philos, pthread_mutex_t *forks)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < program->num_of_philos)
@@ -61,11 +62,8 @@ int	init_forks(pthread_mutex_t *forks, t_program *program)
 	return (0);
 }
 
-int	init_program(t_program *program, t_philo **philos, pthread_mutex_t **forks, char **argv)
+void	init_program_helper(t_program *program, char **argv)
 {
-	int	i;
-
-	i = 0;
 	program->program_finished = 0;
 	program->num_of_philos = ft_atoi(argv[1]);
 	program->time_to_die = ft_atoi(argv[2]);
@@ -75,6 +73,12 @@ int	init_program(t_program *program, t_philo **philos, pthread_mutex_t **forks, 
 		program->required_meals = ft_atoi(argv[5]);
 	else
 		program->required_meals = -1;
+}
+
+int	init_program(t_program *program, t_philo **philos,
+	pthread_mutex_t **forks, char **argv)
+{
+	init_program_helper(program, argv);
 	if (pthread_mutex_init(&program->monitor_lock, NULL) != 0)
 		return (2);
 	ft_mutex(&program->monitor_lock, 0);
@@ -87,8 +91,8 @@ int	init_program(t_program *program, t_philo **philos, pthread_mutex_t **forks, 
 	if (pthread_mutex_init(&program->write_lock, NULL) != 0)
 		return (2);
 	ft_mutex(&program->write_lock, 0);
-    if (allocate_utils(philos, forks, *program))
-        return (1);
+	if (allocate_utils(philos, forks, *program))
+		return (1);
 	if (init_forks(*forks, program))
 		return (2);
 	init_philos(program, *philos, *forks);
