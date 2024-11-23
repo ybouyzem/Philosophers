@@ -6,7 +6,7 @@
 /*   By: ybouyzem <ybouyzem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 11:16:50 by ybouyzem          #+#    #+#             */
-/*   Updated: 2024/11/23 19:58:44 by ybouyzem         ###   ########.fr       */
+/*   Updated: 2024/11/23 20:55:31 by ybouyzem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	*ft_philo(void *arg)
 
 	philo = (t_philo *)arg;
 	if (philo->id % 2 == 0)
-		my_sleep(50, philo);
+		my_sleep(60, philo);
 	while (1)
 	{
 		if (is_dead(philo))
