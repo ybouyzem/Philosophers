@@ -6,7 +6,7 @@
 /*   By: ybouyzem <ybouyzem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 11:16:50 by ybouyzem          #+#    #+#             */
-/*   Updated: 2024/11/23 02:13:04 by ybouyzem         ###   ########.fr       */
+/*   Updated: 2024/11/23 19:58:44 by ybouyzem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,7 @@ void	*ft_philo(void *arg)
 	while (1)
 	{
 		if (is_dead(philo))
-		{
 			break ;
-		}
 		if (is_holding_forks(philo))
 			break ;
 		eating(philo);
