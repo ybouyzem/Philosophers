@@ -59,7 +59,7 @@ void	destroy_mutex(pthread_mutex_t **mutex_list, int i)
 
 void	ft_mutex(pthread_mutex_t *mutex, int mode)
 {
-	static pthread_mutex_t	*mutex_list[1000];
+	static pthread_mutex_t	*mutex_list[INT_MAX];
 	static int				i;
 
 	i = 0;
